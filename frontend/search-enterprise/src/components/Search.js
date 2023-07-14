@@ -9,6 +9,14 @@ function Search() {
     //Prevent page reload
     event.preventDefault();
     console.log(search);
+
+    fetch("https://localhost:4000/Employee/:id")
+      .then((data) => {
+        return data.json();
+      })
+      .then((res) => {
+        console.log(res.name);
+      });
   };
 
   return (

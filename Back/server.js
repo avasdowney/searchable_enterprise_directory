@@ -40,6 +40,9 @@ try {
 module.exports.findEmpID = async function (id, callback) {
     console.log("inside the function")
     console.log(await col.find().toArray())
+    console.log()
+    console.log(await col.find({employee_id: id}).toArray())
+    console.log(await col.find({employee_id: id}).toArray()[0]) // undefined
     col.find({employee_id: id}).toArray(async(err, result) => {
         console.log("inside the query")
         console.log(result)
