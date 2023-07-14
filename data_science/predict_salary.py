@@ -8,8 +8,8 @@ import pickle as pkl
 
 
 # load the model
-model = pkl.load(open('trained_model.pkl', 'rb'))
-df = pd.read_csv('data.csv')
+model = pkl.load(open('data_science/trained_model.pkl', 'rb'))
+df = pd.read_csv('data_science/data.csv')
 
 # function to predict salary
 def predict_salary(job_role, work_location):
@@ -22,13 +22,8 @@ def predict_salary(job_role, work_location):
     return model_prediction[0][0]
 
 # run the script
-def main():
-    print("Enter in your job role (eg. Cloud Engineer)")
-    job_role = input()
-    print("Enter in your job location (eg. Hartford, CT)")
-    work_location = input()
-
+def main(job_role, work_location):
     print(predict_salary(job_role, work_location))
 
 if __name__ == "__main__":
-    main()
+    main("Cloud Engineer", "Hartford, CT")
