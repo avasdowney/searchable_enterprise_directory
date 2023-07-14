@@ -25,6 +25,7 @@ app.get("/Employee/:id", async (req, res) => {
     //button event 
     await dao.findEmployeeByID(req.params.id, (result)=>{
         console.log("result: " + result);
+        res.setHeader("Access-Control-Allow-Origin", "*");
         res.send(result);
     })
 });

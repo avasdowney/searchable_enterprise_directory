@@ -19,7 +19,7 @@ function Login() {
     // console.log(password);
 
     var raw = JSON.stringify({
-      id: username,
+      employee_id: username,
       password: password
     });
 
