@@ -22,9 +22,17 @@ app.get("/Employee", async (req, res) => {
 });
 
 // get employee by ID
-app.get("/Employee", async (req, res) => {
+app.get("/Employee/:id", async (req, res) => {
     //button event 
-    await dao.findEmployees(req.params.id, (result)=>{
+    await dao.findEmployeeByID(req.params.id, (result)=>{
+        console.log("result: " + result);
+        res.send(result);
+    })
+});
+
+app.post("/register", async (req, res) => {
+    //button event 
+    await dao.register((result)=>{
         console.log("result: " + result);
         res.send(result);
     })

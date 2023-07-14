@@ -51,25 +51,43 @@ module.exports.findEmployees = async function (callback) {
     // });
   };
 
-
-
-
-
-
-
-module.exports.findEmpID = async function (id, callback) {
-    console.log("inside the function")
-    console.log(await col.find().toArray())
-    col.find({employee_id: id}).toArray(async(err, result) => {
-        console.log("inside the query")
-        console.log(result)
-    
-        //   if (!err) {
-    //     callback(null, planets[0]);
+module.exports.findEmployeeByID = async function (id, callback) {
+    id = parseInt(id)
+    temp = (await col.find({employee_id: id}).toArray())
+    // console.log(await col.find().toArray())
+    callback(temp)
+    // await col.find({employee_id: id}).toArray(async(err, result) => {
+    //     console.log("a")
+    //   if (!err) {
+    //     callback(null, result);
     //   } else {
     //     callback("Failed to find planets", undefined);
     //   }
-    });
+    // });
+  };
+
+module.exports.register = async function (name, password, phone, role, location, callback) {
+    console.log("register")
+    // console.log(await col.find().toArray())
+    temp = {
+        "name": name,
+        "password": password,
+        "phone_number": phone,
+        "job_role": role,
+        "work_location": location,
+        "salary": "",//run function
+        "manager_id": "", 
+    }
+    await col.insert(temp)
+    callback(temp)
+    // await col.find().toArray(async(err, result) => {
+    //     console.log("a")
+    //   if (!err) {
+    //     callback(null, result);
+    //   } else {
+    //     callback("Failed to find planets", undefined);
+    //   }
+    // });
   };
 
 // module.exports.findAllPlanets = async function (callback) {
