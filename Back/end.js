@@ -50,7 +50,7 @@ app.post("/register", async (req, res) => {
     let options = {
         mode: 'text',
         pythonOptions: ['-u'],
-        scriptPath: 'C:/final/searchable_enterprise_directory/Back/data_science',
+        scriptPath: 'C:/Users/wasadmin/Desktop/er/searchable_enterprise_directory/Back/data_science',
         args: [role, location] 
     };
  

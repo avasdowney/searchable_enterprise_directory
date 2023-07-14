@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles.css";
 
-function Login() {
+function Login(props) {
   const navigate = useNavigate();
 
   const [errorMessages, setErrorMessages] = useState({});
@@ -15,8 +15,8 @@ function Login() {
   const handleSubmit = (event) => {
     //Prevent page reload
     event.preventDefault();
-    console.log(username);
-    console.log(password);
+    // console.log(username);
+    // console.log(password);
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -36,7 +36,7 @@ function Login() {
       .then((response) => response.text())
       .then((result) => {
         console.log("here")
-        navigate("/search");
+        navigate("/search", {state:{id:1,name: username}});
 
         console.log(result)
       })

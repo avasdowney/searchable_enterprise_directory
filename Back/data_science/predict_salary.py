@@ -10,8 +10,8 @@ import pickle as pkl
 
 
 # load the model
-model = pkl.load(open('C:/final/searchable_enterprise_directory/Back/data_science/trained_model.pkl', 'rb'))
-df = pd.read_csv('C:/final/searchable_enterprise_directory/Back/data_science/data.csv')
+model = pkl.load(open('C:/Users/wasadmin/Desktop/er/searchable_enterprise_directory/Back/data_science/trained_model.pkl', 'rb'))
+df = pd.read_csv('C:/Users/wasadmin/Desktop/er/searchable_enterprise_directory/Back/data_science/data.csv')
 
 # function to predict salary
 def predict_salary(job_role, work_location):

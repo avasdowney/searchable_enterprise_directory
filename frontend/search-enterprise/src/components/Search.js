@@ -13,7 +13,8 @@ function Search(props) {
   let [salary, setSalary] = React.useState("");
 
   const location = useLocation()
-  // console.log(location.state.name)
+  console.log(location.state.name)
+  let UserID = location.state.name
 
   const handleSubmit = async (event) => {
     event.preventDefault();
