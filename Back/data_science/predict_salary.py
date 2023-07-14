@@ -1,3 +1,5 @@
+import sys
+
 import numpy as np
 import pandas as pd
 
@@ -28,4 +30,5 @@ def main(job_role, work_location):
     return salary
 
 if __name__ == "__main__":
-    main("Cloud Engineer", "Hartford, CT")
+    # main("Cloud Engineer", "Hartford, CT")
+    main(sys.argv[1], sys.argv[2])
