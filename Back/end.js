@@ -7,8 +7,6 @@ const {PythonShell} = require('python-shell');
 
 // server app
 var app = express();
-// console.log("hello")
-// console.log("hi")
 
 //Parse JSON body
 app.use(bodyParser.json());
@@ -41,9 +39,9 @@ app.post("/register", async (req, res) => {
 
     let options = {
         mode: 'text',
-        pythonOptions: ['-u'], // get print results in real-time
-        scriptPath: 'C:/final/searchable_enterprise_directory/Back/data_science', //If you are having python_test.py script in same folder, then it's optional.
-        args: [role, location] //An argument which can be accessed in the script using sys.argv[1]
+        pythonOptions: ['-u'],
+        scriptPath: 'C:/final/searchable_enterprise_directory/Back/data_science',
+        args: [role, location] 
     };
  
     await PythonShell.run('predict_salary.py', options).then(results=>{
