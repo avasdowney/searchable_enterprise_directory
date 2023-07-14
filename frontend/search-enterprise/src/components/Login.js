@@ -4,8 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./styles.css";
 
 function Login() {
-    const navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -16,11 +15,27 @@ function Login() {
   const handleSubmit = (event) => {
     //Prevent page reload
     event.preventDefault();
-    console.log(username);
-    console.log(password);
+    // console.log(username);
+    // console.log(password);
 
-    navigate("/search", { replace: true });
+    var raw = JSON.stringify({
+      id: username,
+      password: password
+    });
 
+    var requestOptions = {
+      method: "POST",
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:4000/login", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        navigate("/search", { replace: true });
+      })
+      .catch((error) => console.log("MealScreen food-log error", error));
   };
 
   // Generate JSX code for error message

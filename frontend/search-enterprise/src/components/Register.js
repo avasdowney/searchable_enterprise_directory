@@ -1,37 +1,58 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  createSearchParams,
+  useSearchParams,
+} from "react-router-dom";
 import "./styles.css";
 
-function Login() {
+function Register(props) {
   const navigate = useNavigate();
-
 
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   let [username, setUsername] = React.useState("");
   let [password, setPassword] = React.useState("");
-  let [empID, setEmpID] = React.useState("");
+  // let [empID, setEmpID] = React.useState("");
   let [phoneNumber, setPhoneNumber] = React.useState("");
   let [jobRole, setJobRole] = React.useState("");
   let [WorkLocation, setWorkLocation] = React.useState("");
-  let [salary, setSalary] = React.useState("");
+  // let [salary, setSalary] = React.useState("");
 
   const handleSubmit = (event) => {
     //Prevent page reload
     event.preventDefault();
-    console.log(username);
-    console.log(password);
-    console.log(empID);
-    console.log(phoneNumber);
-    console.log(jobRole);
-    console.log(WorkLocation);
-    console.log(salary);
+    // console.log(username);
+    // console.log(password);
+    // console.log(phoneNumber);
+    // console.log(jobRole);
+    // console.log(WorkLocation);
 
-    navigate("/search", { replace: true });
+    // var raw = JSON.stringify({
+    //   "name": username,
+    //   "password": password,
+    //   "phone_number": phoneNumber,
+    //   "job_role": jobRole,
+    //   "work_location": WorkLocation
+    // });
 
+    // var requestOptions = {
+    //   method: 'POST',
+    //   body: raw,
+    //   redirect: 'follow'
+    // };
 
+    // fetch("http://localhost:4000/register", requestOptions)
+    //   .then(response => response.text())
+    //   .then(result => {
+    //     console.log(result)
+    //     navigate("/search", { replace: true });
+    //   })
+    //   .catch(error => console.log('MealScreen food-log error', error));
+    navigate("/search", {state:{id:1, name:'sabaoon'}},{ replace: true });
   };
 
   // Generate JSX code for error message
@@ -66,7 +87,7 @@ function Login() {
           {renderErrorMessage("pass")}
         </div>
 
-        <div className="input-container">
+        {/* <div className="input-container">
           <label>Enter your ID </label>
           <input
             type="text"
@@ -76,7 +97,7 @@ function Login() {
           />
 
           {renderErrorMessage("uname")}
-        </div>
+        </div> */}
 
         <div className="input-container">
           <label>Phone Number </label>
@@ -105,9 +126,8 @@ function Login() {
                 onChange={(e) => setWorkLocation(e.target.value)}
               />
 
-
               <div className="input-container">
-              {/* <div className="input-container">
+                {/* <div className="input-container">
                 <label>Salary </label>
                 <input
                   type="text"
@@ -121,14 +141,14 @@ function Login() {
               </div>
               </div> */}
 
+                {renderErrorMessage("uname")}
+              </div>
 
               {renderErrorMessage("uname")}
             </div>
 
             {renderErrorMessage("uname")}
           </div>
-
-          {renderErrorMessage("uname")}
         </div>
         <div className="button-container">
           <input type="submit" />
@@ -148,4 +168,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
