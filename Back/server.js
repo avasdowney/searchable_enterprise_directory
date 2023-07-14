@@ -66,27 +66,10 @@ module.exports.findEmployeeByID = async function (id, callback) {
     // });
   };
 
-module.exports.register = async function (name, password, phone, role, location, callback) {
-    console.log("register")
+module.exports.register = async function (name, password, phone, role, location, salary, callback) {
     count = (await col.countDocuments())
     new_id = count + 10000
-    let salary;
-    let options = {
-        mode: 'text',
-        pythonOptions: ['-u'], // get print results in real-time
-          scriptPath: 'C:\final\searchable_enterprise_directory\frontend\search-enterprise\src\components', //If you are having python_test.py script in same folder, then it's optional.
-        args: ['shubhamk314'] //An argument which can be accessed in the script using sys.argv[1]
-    };
-     
- 
-    PythonShell.run('python_test.py', options, function (err, result){
-          if (err) throw err;
-          // result is an array consisting of messages collected
-          //during execution of script.
-          console.log('result: ', result.toString());
-          salary = parseInt(result)
-          res.send(result.toString())
-    });
+    console.log(salary)
 
     temp = {
         "name": name,

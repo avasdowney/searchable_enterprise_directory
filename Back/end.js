@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-var dao = require("./server"); 
+var dao = require("./server");
+const {PythonShell} = require('python-shell');
 
 // import { registerUser } from './server';
 
@@ -36,9 +37,20 @@ app.post("/register", async (req, res) => {
     let phone = req.body.phone_number;
     let role = req.body.job_role;
     let location = req.body.work_location;
-    //button event 
-    await dao.register(name, password, phone, role, location,  (result)=>{
-        console.log("result: " + result);
+    let salary;
+
+    let options = {
+        mode: 'text',
+        pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: 'C:/final/searchable_enterprise_directory/Back/data_science', //If you are having python_test.py script in same folder, then it's optional.
+        args: [role, location] //An argument which can be accessed in the script using sys.argv[1]
+    };
+ 
+    await PythonShell.run('predict_salary.py', options).then(results=>{
+        salary = parseInt(parseInt(results[1]))
+    });
+    //button event
+    await dao.register(name, password, phone, role, location, salary, (result)=>{
         res.send(result);
     })
 });
