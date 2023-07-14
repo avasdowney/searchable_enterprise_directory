@@ -31,8 +31,24 @@ app.get("/Employee/:id", async (req, res) => {
 });
 
 app.post("/register", async (req, res) => {
+    let name = req.body.name;
+    let password = req.body.password;
+    let phone = req.body.phone_number;
+    let role = req.body.job_role;
+    let location = req.body.work_location;
     //button event 
-    await dao.register((result)=>{
+    await dao.register(name, password, phone, role, location,  (result)=>{
+        console.log("result: " + result);
+        res.send(result);
+    })
+});
+
+app.post("/login", async (req, res) => {
+    id = req.body.employee_id
+    console.log(id)
+    pw = req.body.password
+    //button event 
+    await dao.login(id, pw, (result)=>{
         console.log("result: " + result);
         res.send(result);
     })

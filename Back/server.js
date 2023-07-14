@@ -68,18 +68,71 @@ module.exports.findEmployeeByID = async function (id, callback) {
 
 module.exports.register = async function (name, password, phone, role, location, callback) {
     console.log("register")
-    // console.log(await col.find().toArray())
+    count = (await col.countDocuments())
+    new_id = count + 10000
+    let salary;
+    let options = {
+        mode: 'text',
+        pythonOptions: ['-u'], // get print results in real-time
+          scriptPath: 'C:\final\searchable_enterprise_directory\frontend\search-enterprise\src\components', //If you are having python_test.py script in same folder, then it's optional.
+        args: ['shubhamk314'] //An argument which can be accessed in the script using sys.argv[1]
+    };
+     
+ 
+    PythonShell.run('python_test.py', options, function (err, result){
+          if (err) throw err;
+          // result is an array consisting of messages collected
+          //during execution of script.
+          console.log('result: ', result.toString());
+          salary = parseInt(result)
+          res.send(result.toString())
+    });
+
     temp = {
         "name": name,
         "password": password,
+        "employee_id": new_id,
         "phone_number": phone,
         "job_role": role,
         "work_location": location,
-        "salary": "",//run function
+        "salary": salary,
         "manager_id": "", 
     }
-    await col.insert(temp)
-    callback(temp)
+    let object = {
+        "message": "Succesfull insert",
+        "UserID": new_id
+    }
+    await col.insertOne(temp)
+    callback(object)
+
+
+
+    // await col.find().toArray(async(err, result) => {
+    //     console.log("a")
+    //   if (!err) {
+    //     callback(null, result);
+    //   } else {
+    //     callback("Failed to find planets", undefined);
+    //   }
+    // });
+  };
+
+module.exports.login = async function (userID, password, callback) {
+    id = parseInt(userID)
+    pw = password
+
+    valid = await col.find({employee_id: id}).toArray()
+    if (valid == ''){
+        console.log("invalid userID, enter correct one or register if first time")
+        //invalid userID, enter correct one
+    }else{
+        console.log(id)
+        validpw = await col.find({employee_id: id}, {_id: 0, password: 1}).toArray();
+        console.log(validpw)
+    }
+
+    // console.log(await col.find().toArray())
+
     // await col.find().toArray(async(err, result) => {
     //     console.log("a")
     //   if (!err) {
