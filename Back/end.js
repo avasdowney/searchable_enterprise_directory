@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 var dao = require("./server");
 const {PythonShell} = require('python-shell');
+var cors = require("cors")
 
 // import { registerUser } from './server';
 
@@ -10,6 +11,14 @@ var app = express();
 
 //Parse JSON body
 app.use(bodyParser.json());
+
+const corsOptions ={
+    origin:'*', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200,
+ }
+ 
+ app.use(cors(corsOptions)) // Use this after the variable declaration
 
 // get employees
 app.get("/Employee", async (req, res) => {
@@ -61,6 +70,7 @@ app.post("/login", async (req, res) => {
     //button event 
     await dao.login(id, pw, (result)=>{
         console.log("result: " + result);
+        res.setHeader("Access-Control-Allow-Origin", "*");
         res.send(result);
     })
 });
