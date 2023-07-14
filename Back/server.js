@@ -68,7 +68,8 @@ module.exports.login = async function (userID, password, callback) {
     valid = await col.find({employee_id: id}).toArray()
     if (valid == ''){
         console.log("invalid userID, enter correct one or register if first time")
-        callback('1')
+
+        callback("1")
         //invalid userID, enter correct one
     }else{
         temp = await col.find({employee_id: id}, {_id: 0, password: 1}).toArray();
@@ -78,7 +79,7 @@ module.exports.login = async function (userID, password, callback) {
             callback('2')
         }else{
             console.log("Welcome")
-            callback('3')
+            callback("3")
         }
     }
   };
