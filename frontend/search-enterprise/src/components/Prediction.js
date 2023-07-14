@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
-// import navbar from './components/Navbar.js'
 
+// import navbar from './components/Navbar.js'
 
 function Prediction() {
   const navigate = useNavigate();
 
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+
+//   let [username, setUsername] = React.useState("");
+//   let [password, setPassword] = React.useState("");
+
 
   const handleSubmit = (event) => {
     //Prevent page reload
@@ -21,6 +26,7 @@ function Prediction() {
 
   return (
     <>
+
     {/* <navbar /> */}
       <div>
         <h1>Please select Job Role</h1>

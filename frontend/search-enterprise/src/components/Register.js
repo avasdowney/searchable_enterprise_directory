@@ -105,6 +105,8 @@ function Login() {
                 onChange={(e) => setWorkLocation(e.target.value)}
               />
 
+
+              <div className="input-container">
               {/* <div className="input-container">
                 <label>Salary </label>
                 <input
@@ -115,7 +117,10 @@ function Login() {
                 />
 
                 {renderErrorMessage("uname")}
+
+              </div>
               </div> */}
+
 
               {renderErrorMessage("uname")}
             </div>
