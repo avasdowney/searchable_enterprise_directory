@@ -34,7 +34,12 @@ function Login() {
 
     fetch("http://localhost:4000/login", requestOptions)
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) => {
+        console.log("here")
+        navigate("/search");
+
+        console.log(result)
+      })
       .catch((error) => console.log("error", error));
 
     // var raw = JSON.stringify({
