@@ -66,20 +66,56 @@ module.exports.findEmployeeByID = async function (id, callback) {
     // });
   };
 
-module.exports.register = async function (name, password, phone, role, location, callback) {
-    console.log("register")
-    // console.log(await col.find().toArray())
+module.exports.register = async function (name, password, phone, role, location, salary, callback) {
+    count = (await col.countDocuments())
+    new_id = count + 10000
+    console.log(salary)
+
     temp = {
         "name": name,
         "password": password,
+        "employee_id": new_id,
         "phone_number": phone,
         "job_role": role,
         "work_location": location,
-        "salary": "",//run function
+        "salary": salary,
         "manager_id": "", 
     }
-    await col.insert(temp)
-    callback(temp)
+    let object = {
+        "message": "Succesfull insert",
+        "UserID": new_id
+    }
+    await col.insertOne(temp)
+    callback(object)
+
+
+
+    // await col.find().toArray(async(err, result) => {
+    //     console.log("a")
+    //   if (!err) {
+    //     callback(null, result);
+    //   } else {
+    //     callback("Failed to find planets", undefined);
+    //   }
+    // });
+  };
+
+module.exports.login = async function (userID, password, callback) {
+    id = parseInt(userID)
+    pw = password
+
+    valid = await col.find({employee_id: id}).toArray()
+    if (valid == ''){
+        console.log("invalid userID, enter correct one or register if first time")
+        //invalid userID, enter correct one
+    }else{
+        console.log(id)
+        validpw = await col.find({employee_id: id}, {_id: 0, password: 1}).toArray();
+        console.log(validpw)
+    }
+
+    // console.log(await col.find().toArray())
+
     // await col.find().toArray(async(err, result) => {
     //     console.log("a")
     //   if (!err) {
