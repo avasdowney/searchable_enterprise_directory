@@ -64,6 +64,7 @@ module.exports.login = async function (userID, password, callback) {
     id = parseInt(userID)
     pw = password
     let validpw;
+    let man_id = [];
 
     valid = await col.find({employee_id: id}).toArray()
     if (valid == ''){
@@ -79,8 +80,17 @@ module.exports.login = async function (userID, password, callback) {
         }else{
             console.log("Welcome")
             man = await col.find({manager_id: id}, {_id: 0, employee_id:1}).toArray()
-            console.log(man)
-            callback(man)
+            if (man == ''){
+                man_id[0] = "no"
+                //not a manager
+            }else{
+                man_id[0] = "yes"
+                for (let i = 0; i < 19; i++){
+                    man_id[i + 1] = man[i].employee_id
+                }
+            }
+            //console.log(man)
+            callback(man_id)
         }
     }
   };
