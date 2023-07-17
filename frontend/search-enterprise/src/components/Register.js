@@ -31,28 +31,34 @@ function Register(props) {
     // console.log(jobRole);
     // console.log(WorkLocation);
 
-    // var raw = JSON.stringify({
-    //   "name": username,
-    //   "password": password,
-    //   "phone_number": phoneNumber,
-    //   "job_role": jobRole,
-    //   "work_location": WorkLocation
-    // });
 
-    // var requestOptions = {
-    //   method: 'POST',
-    //   body: raw,
-    //   redirect: 'follow'
-    // };
+    
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
-    // fetch("http://localhost:4000/register", requestOptions)
-    //   .then(response => response.text())
-    //   .then(result => {
-    //     console.log(result)
-    //     navigate("/search", { replace: true });
-    //   })
-    //   .catch(error => console.log('MealScreen food-log error', error));
-    navigate("/search", {state:{id:1, name:'sabaoon'}},{ replace: true });
+    var raw = JSON.stringify({
+      "name": username,
+      "password": password,
+      "phone_number": phoneNumber,
+      "job_role": jobRole,
+      "work_location": WorkLocation
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      body: raw,
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    fetch("http://localhost:4000/register", requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        console.log(result)
+        navigate("/search", { replace: true });
+      })
+      .catch(error => console.log('MealScreen food-log error', error));
+    // navigate("/search", {state:{id:1, name:'sabaoon'}},{ replace: true });
   };
 
   // Generate JSX code for error message

@@ -75,6 +75,27 @@ app.post("/login", async (req, res) => {
     })
 });
 
+app.post("/prediction", async (req, res) =>{
+    let role = req.body.job_role;
+    let location = req.body.work_location;
+    let salary;
+
+    let options = {
+        mode: 'text',
+        pythonOptions: ['-u'],
+        scriptPath: 'C:/Users/wasadmin/Desktop/er2/searchable_enterprise_directory/Back/data_science',
+        args: [role, location] 
+    };
+ 
+    await PythonShell.run('predict_salary.py', options).then(results=>{
+        salary = parseInt(results[1])
+        console.log(salary)
+    });
+    //button event
+    res.send(salary.toString());
+});
+
+
 // start the rest service
 var port = 4000;
 console.log('service opening on port: ' + port)

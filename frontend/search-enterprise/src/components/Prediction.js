@@ -6,22 +6,20 @@ import { Link, useNavigate } from "react-router-dom";
 // import navbar from './components/Navbar.js'
 
 function Prediction() {
-  const navigate = useNavigate();
-
-  const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  //   let [username, setUsername] = React.useState("");
-  //   let [password, setPassword] = React.useState("");
 
   const [value, setValue] = useState("Junior Software Engineer");
   const [value2, setValue2] = useState("Hartford, CT");
+  let [salary, setSalary] = React.useState("");
+
 
   const handleChange = (e) => {
+    console.log("job has been called")
+
     setValue(e.target.value);
   };
 
   const handleChange2 = (e) => {
+    console.log("job location has been called")
     setValue2(e.target.value2);
   };
 
@@ -29,9 +27,30 @@ function Prediction() {
     //Prevent page reload
     event.preventDefault();
     console.log("submitted");
-    console.log(value);
-    console.log(value2);
+    // console.log(value);
+    // console.log(value2);
 
+    var raw = JSON.stringify({ job_role: value, work_location: value2 });
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:4000/prediction", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        console.log("inside prediction")
+        // navigate("/search", {state:{id:1,name: username}});
+        setSalary(result)
+
+        console.log(result)
+      })
+      .catch((error) => console.log("error", error));
 
   };
 
@@ -45,26 +64,27 @@ function Prediction() {
         <h1>Please select Job Role</h1>
         <form onSubmit={handleSubmit}>
           <select value={value} onChange={handleChange}>
-            <option value="fruit">Junior Software Engineer</option>
+            <option>Junior Software Engineer</option>
 
-            <option value="vegetable">Senior Software Engineer</option>
+            <option>Senior Software Engineer</option>
 
-            <option value="meat">Junior Data Engineer</option>
-            <option value="meat">Senior Data Engineer</option>
-            <option value="meat">Cloud Engineer</option>
-            <option value="meat">HR Professional</option>
+            <option>Junior Data Engineer</option>
+            <option>Senior Data Engineer</option>
+            <option>Cloud Engineer</option>
+            <option>HR Professional</option>
           </select>
 
           <h1>Please select Work Location</h1>
-          <select value2={value2} onChange={handleChange2}>
-            <option value="fruit">Hartford, CT</option>
-            <option value="vegetable">St Paul, MN</option>
-            <option value="meat">Hunt Valley, MD</option>
-            <option value="meat">New York, NY</option>
+          <select value={value2} onChange={handleChange2}>
+            <option>Hartford, CT</option>
+            <option>Saint Paul, MN</option>
+            <option>Hunt Valley, MD</option>
+            <option>New York, NY</option>
           </select>
           <div className="button-container">
             <input type="submit" />
           </div>
+          <p>{salary}</p>
         </form>
         <Link to="/search"> Search Directory </Link>
 
