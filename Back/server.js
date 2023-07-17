@@ -1,3 +1,4 @@
+
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
@@ -27,7 +28,6 @@ try {
 
 //finds all employees
 module.exports.findEmployees = async function (callback) {
-    console.log("inside the function")
     callback(await col.find().toArray())
   };
 
@@ -80,15 +80,17 @@ module.exports.login = async function (userID, password, callback) {
         }else{
             console.log("Welcome")
             man = await col.find({manager_id: id}, {_id: 0, employee_id:1}).toArray()
-            if (man == ''){
-                man_id[0] = "no"
-                //not a manager
-            }else{
+            r = valid[0].job_role
+            console.log(r)
+            if (r.includes("HR") && r.includes("Manager")){
+                man_id[0] = "HR"
+            }else if (r.includes("Manager") || r.includes("CEO")){
                 man_id[0] = "yes"
-                console.log(man.length)
-                for (let i = 0; i < 18; i++){
+                for (let i = 0; i < 19; i++){
                     man_id[i + 1] = man[i].employee_id
                 }
+            }else{
+                man_id[0] = "no"
             }
             //console.log(man)
             callback(man_id)

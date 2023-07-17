@@ -39,9 +39,10 @@ function Search(props) {
         let work = parse[0].work_location;
         let salary = parse[0].salary;
 
-        console.log(UserID)
-        console.log(id)
-        if (parseInt(UserID) == parseInt(id) ||  (reports.includes(id))){
+        // if the user is a manager or employee
+        console.log(reports)
+        console.log(reports[0])
+        if (parseInt(UserID) == parseInt(id) ||  reports.includes(id) || reports == ["HR"]){
           console.log("in the if statement")
           setSalary(salary)
         } else {
