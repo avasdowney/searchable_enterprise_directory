@@ -64,11 +64,11 @@ module.exports.login = async function (userID, password, callback) {
     id = parseInt(userID)
     pw = password
     let validpw;
+    let man_id = [];
 
     valid = await col.find({employee_id: id}).toArray()
     if (valid == ''){
         console.log("invalid userID, enter correct one or register if first time")
-
         callback("1")
         //invalid userID, enter correct one
     }else{
@@ -76,10 +76,22 @@ module.exports.login = async function (userID, password, callback) {
         validpw = temp[0].password
         if (validpw != pw){
             console.log("Incorrect password, try again")
-            callback('2')
+            callback("2")
         }else{
             console.log("Welcome")
-            callback("3")
+            man = await col.find({manager_id: id}, {_id: 0, employee_id:1}).toArray()
+            if (man == ''){
+                man_id[0] = "no"
+                //not a manager
+            }else{
+                man_id[0] = "yes"
+                console.log(man.length)
+                for (let i = 0; i < 18; i++){
+                    man_id[i + 1] = man[i].employee_id
+                }
+            }
+            //console.log(man)
+            callback(man_id)
         }
     }
   };

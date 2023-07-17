@@ -10,14 +10,11 @@ import pickle as pkl
 
 
 # load the model
-<<<<<<< Updated upstream
 
-model = pkl.load(open('./Back/data_science/trained_model.pkl', 'rb'))
-df = pd.read_csv('./Back/data_science/data.csv')
-=======
+# model = pkl.load(open('./Back/data_science/trained_model.pkl', 'rb'))
+# df = pd.read_csv('./Back/data_science/data.csv')
 model = pkl.load(open('C:/Users/wasadmin/Desktop/er2/searchable_enterprise_directory/Back/data_science/trained_model.pkl', 'rb'))
 df = pd.read_csv('C:/Users/wasadmin/Desktop/er2/searchable_enterprise_directory/Back/data_science/data.csv')
->>>>>>> Stashed changes
 
 # function to predict salary
 def predict_salary(job_role, work_location):

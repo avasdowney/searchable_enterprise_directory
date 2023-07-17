@@ -123,6 +123,18 @@ function Register(props) {
               onChange={(e) => setJobRole(e.target.value)}
             />
 
+{/* "Junior Software Engineer" ,
+    "Senior Software Engineer" ,
+    "Software Engineer Manager",
+    "Junior Data Engineer" ,
+    "Senior Data Engineer" ,
+    "Data Engineer Manager",
+    "HR Representative" ,
+    "HR Specialist" ,
+    "HR Manager"  */}
+
+    
+
             <div className="input-container">
               <label>Work Location</label>
               <input

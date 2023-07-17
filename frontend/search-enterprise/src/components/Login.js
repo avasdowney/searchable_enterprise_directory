@@ -11,6 +11,7 @@ function Login(props) {
 
   let [username, setUsername] = React.useState("");
   let [password, setPassword] = React.useState("");
+  let [managers, setManagers] = React.useState("");
 
   const handleSubmit = (event) => {
     //Prevent page reload
@@ -36,7 +37,12 @@ function Login(props) {
       .then((response) => response.text())
       .then((result) => {
         console.log("here")
-        navigate("/search", {state:{id:1,name: username}});
+
+        if (result[0] == "yes"){
+          setManagers(result)
+        }
+
+        navigate("/search", {state:{id:1,name: username, reports: result}});
 
         console.log(result)
       })

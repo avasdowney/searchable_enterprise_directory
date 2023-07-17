@@ -10,11 +10,12 @@ function Search(props) {
   let [phone, setPhone] = React.useState("");
   let [job, setJob] = React.useState("");
   let [work, setWork] = React.useState("");
-  let [salary, setSalary] = React.useState("");
+  let [salary, setSalary] = React.useState("Cannot view Salary");
 
   const location = useLocation()
-  console.log(location.state.name)
+  // console.log(location.state.name)
   let UserID = location.state.name
+  let reports = location.state.reports
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,6 +26,10 @@ function Search(props) {
         return data.text();
       })
       .then((res) => {
+        
+        setSalary("Cannot view salary")
+
+
         console.log(res);
         let parse = JSON.parse(res);
         let name = parse[0].name;
@@ -33,13 +38,28 @@ function Search(props) {
         let job = parse[0].job_role;
         let work = parse[0].work_location;
         let salary = parse[0].salary;
+
+        console.log(UserID)
+        console.log(id)
+        if (parseInt(UserID) == parseInt(id) ||  (reports.includes(id))){
+          console.log("in the if statement")
+          setSalary(salary)
+        } else {
+          setSalary("Cannot view salary")
+
+        }
+
+        // if (reports.includes(id)){
+        //   setSalary(salary);
+        // } else {
+        //   setSalary("Cannot view salary")
+        // }
         
         setName(name);
         setID(id);
         setPhone(phone);
         setJob(job);
         setWork(work);
-        setSalary(salary);
       });
   };
 
