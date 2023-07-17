@@ -18,7 +18,7 @@ import pickle as pkl
 # %%
 # read the data
 
-df = pd.read_csv('data.csv')
+df = pd.read_csv('./Back/data_science/data.csv')
 
 # %%
 df_data = df[['job_role','work_location']] # values used to make prediction
@@ -51,5 +51,5 @@ model.fit(X_train, y_train)
 # ### Saving the Model
 
 # %%
-with open("trained_model.pkl", "wb") as f:
+with open("./Back/data_science/trained_model.pkl", "wb") as f:
     pkl.dump(model,f)
